@@ -10,9 +10,13 @@ class block_introcomputerscience extends block_base {
         }
      
         $this->content         =  new stdClass;
-        $this->content->text   = 'The content of our introcomputerscience block!';
-        $this->content->footer = 'Footer here...';
+        if (! empty($this->config->content_text)) {
+            $this->content->text = $this->config->content_text;
+        }else{
+            $this->content->text   = 'The content of our introcomputerscience block!';
+        }
      
         return $this->content;
+
     }
 }
