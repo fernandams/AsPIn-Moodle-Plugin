@@ -18,7 +18,22 @@ class block_introcomputerscience extends block_base {
         //$users == array of users
         $grading_info = grade_get_grades($course_id, 'mod', 'quiz', 4, $user_id);
  
-        return " Id: " . $user_id . "\nNome: " . $user_name . " Nota: " . $grading_info->items[0]->grades[$user_id]->str_grade;
+        $user_grade = $grading_info->items[0]->grades[$user_id]->grade;
+
+        if(empty($user_grade)){
+            return "Parece que você ainda não respondeu o questionário!";
+        }elseif($user_grade == 4){
+            return "Id: " . $user_id . "\nNome: " . $user_name . "Nota: " . $grading_info->items[0]->grades[$user_id]->str_grade . "\nSiga o curso normalmente!";
+        } elseif (( $user_grade == 2) || ($user_grade == 3)){
+
+            return "Id: " . $user_id . "\nNome: " . $user_name . "Nota: " . $grading_info->items[0]->grades[$user_id]->str_grade . "\nRecomendamos que você faça a seção Básica!";
+
+        } elseif (($user_grade == 0) || ($user_grade == 1)){
+
+            return "Id: " . $user_id . "\nNome: " . $user_name . "Nota: " . $grading_info->items[0]->grades[$user_id]->str_grade . "\nRecomendamos que você faça a seção Introdutória!";
+        }else{
+            return "Parece que você ainda não respondeu o questionário!";
+        }
     }
    
     public function get_content() {
@@ -28,12 +43,10 @@ class block_introcomputerscience extends block_base {
      
         $this->content         =  new stdClass;
         if (! empty($this->config->content_text)) {
-            $this->content->text = $this->config->content_text;
+            $this->content->text = '<p>'. $this->config->content_text . '</p> <p>' . $this->get_user_grade() . '</p>' ;
         }else{
-            $this->content->text   = 'The content of our introcomputerscience block!';
+            $this->content->text   = '<p> The content of our introcomputerscience block! </p> <p>' . $this->get_user_grade() . '</p>' ;
         }
-     
-        $this->content->footer = $this->get_user_grade();
 
         return $this->content;
 
