@@ -27,20 +27,33 @@ class block_introcomputerscience extends block_base {
         return $user_grade;
     }
    
+    public function get_quiz_module_id() {
+        global $DB, $COURSE;
+        $selected_quiz = $this->config->selected_quiz;
+
+        $sql_query = 'select id from mdl_course_modules where course = ' . $COURSE->id . ' and module = 16 and instance = ' . $selected_quiz . ';';
+        $query_result = $DB->get_record_sql($sql_query);   
+
+        return $query_result->id;
+    }
+
     public function define_text_content() {
+        global $CFG;
+
         $presentation_text = '<p class="ics-light-text">Olá! Sou seu Assistente nesta disciplina. Meu objetivo é te auxiliar no seu processo de aprendizado!</p>';
         $hr = '<hr/>';
         $main_text = '';
         $recommended_list = '';
         $secondary_text = '';
-    
+        $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . $this->get_quiz_module_id();
+
         if (empty($this->config->selected_quiz)) {
             $main_text = '<p>Professor, por favor, selecione o questionário de percepção nas configurações deste bloco!</p>';
         } else {
             $user_grade = $this->get_user_grade();
 
             if (empty($user_grade)) {
-                $main_text = '<p>Para que possamos trabalhar bem juntos, preciso que você responda o <a href="https://youtube.com">Formulário de Percepção</a>.</p>';
+                $main_text = '<p>Para que possamos trabalhar bem juntos, preciso que você responda o <a href="' . $quiz_link . '">Formulário de Percepção</a>.</p>';
 
                 $secondary_text = '<p class="ics-light-text">Em caso de dúvidas, procure seu professor, tutor ou monitor.</p>';
             } elseif ($user_grade == 4) {
