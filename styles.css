@@ -1,6 +1,10 @@
 .ics-light-text {
     font-weight: 300;
 }
+.ics-config-list li {
+    margin: 0.75rem 0;
+}
+
 .ics-list {
    list-style-type: square;
    color: #C4C4C4;
