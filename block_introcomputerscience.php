@@ -140,6 +140,24 @@ class block_introcomputerscience extends block_base {
         return $query_result->timeclose;
     }
 
+    public function define_list_support_text() {
+        if (!empty($this->config->list_7) && ($this->get_timeclose_quiz($this->config->list_7) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_7))) {
+            return "Quiz 7";
+        } elseif (!empty($this->config->list_6) && ($this->get_timeclose_quiz($this->config->list_6) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_6))) {
+            return "Quiz 6";
+        } elseif (!empty($this->config->list_5) && ($this->get_timeclose_quiz($this->config->list_5) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_5))) {
+            return "Quiz 5";
+        } elseif (!empty($this->config->list_4) && ($this->get_timeclose_quiz($this->config->list_4) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_4))) {
+            return "Quiz 4";
+        } elseif (!empty($this->config->list_3) && ($this->get_timeclose_quiz($this->config->list_3) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_3))) {
+            return "Quiz 3";
+        } elseif (!empty($this->config->list_2) && ($this->get_timeclose_quiz($this->config->list_2) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_2))) {
+            return "Quiz 2";
+        } else {
+            return "Quiz 1";
+        }
+    }
+
     public function get_content() {
         global $CFG, $USER, $COURSE;
 
@@ -154,7 +172,7 @@ class block_introcomputerscience extends block_base {
         if (has_capability('moodle/course:update', $context, $USER->id)) {
             $this->content->text = $this->define_teacher_text();
         } elseif (!empty($this->config->list_1) && ($this->get_timeclose_quiz($this->config->list_1) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_1))) {
-            $this->content->text = time();
+            $this->content->text = $this->define_list_support_text();
         } else {
             $this->content->text = $this->define_initial_text();
         }
