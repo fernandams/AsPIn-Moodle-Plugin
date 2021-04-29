@@ -1,59 +1,11 @@
 <?php
 
 require_once(dirname(__FILE__) . '/../../config.php');
-require_once($CFG->libdir.'/gradelib.php');
-
+require_once($CFG->dirroot . '/blocks/introcomputerscience/database_functions.php');
 
 class block_introcomputerscience extends block_base {
     public function init() {
         $this->title = get_string('introcomputerscience', 'block_introcomputerscience');
-    }
-
-    public function get_user_grade($quiz_id) {
-        global $USER, $COURSE;
-   
-        if (!empty($quiz_id)) {
-
-            $user_id = $USER->id;
-            $user_name = $USER->username;
-            $course_id = $COURSE->id;
-    
-            $grading_info = grade_get_grades($course_id, 'mod', 'quiz', $quiz_id, $user_id);
-     
-            $user_grade = $grading_info->items[0]->grades[$user_id]->grade;
-            
-            return $user_grade;   
-        } else {
-            return null;
-        }
-    }
-   
-    public function get_quiz_module_id() {
-        global $DB, $COURSE;
-        
-        if (!empty($this->config->selected_quiz)) {
-            $selected_quiz = $this->config->selected_quiz;
-            $sql_query = 'select id from mdl_course_modules where course = ' . $COURSE->id . ' and module = 16 and instance = ' . $selected_quiz . ';';
-            $query_result = $DB->get_record_sql($sql_query);   
-           
-            return $query_result->id;
-        } else {
-            return null;
-        }
-    }
-
-    public function get_quiz_name() {
-        global $DB;
-        
-        if (!empty($this->config->selected_quiz)) {
-            $selected_quiz = $this->config->selected_quiz;
-            $sql_query = 'select name from mdl_quiz where id = ' . $selected_quiz . ';';
-            $query_result = $DB->get_record_sql($sql_query);   
-           
-            return $query_result->name;
-        } else {
-            return null;
-        }
     }
 
     public function define_teacher_text() {
@@ -85,7 +37,7 @@ class block_introcomputerscience extends block_base {
             
             <li>Na página de configuração, preencha a seção “Configurações do Bloco” de acordo com suas preferências.</li>
             </ol>
-            <p><span class="ics-light-text">O questionário selecionado é:</span> ' . $this->get_quiz_name() . '.</p>';
+            <p><span class="ics-light-text">O questionário selecionado é:</span> ' . get_quiz_name($this->config->selected_quiz) . '.</p>';
 
             $secondary_text = '<p class="ics-light-text">Uma vez configurado, o Assistente estará pronto para auxiliar seus alunos!</p>';
         }
@@ -100,9 +52,9 @@ class block_introcomputerscience extends block_base {
         $main_text = '';
         $recommended_list = '';
         $secondary_text = '';
-        $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . $this->get_quiz_module_id();
+        $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($this->config->selected_quiz);
 
-        $user_grade = $this->get_user_grade($this->config->selected_quiz);
+        $user_grade = get_user_grade($this->config->selected_quiz);
 
         if (empty($this->config->selected_quiz)) { 
             return '';
@@ -131,29 +83,21 @@ class block_introcomputerscience extends block_base {
         return $presentation_text . $hr . $main_text . $recommended_list . $secondary_text;
     }
 
-    public function get_timeclose_quiz($quiz_id) {
-        global $COURSE, $DB;
-
-        $sql_query = 'select timeclose from mdl_quiz where course = ' . $COURSE->id . ' and id = ' . $quiz_id . ';';
-        $query_result = $DB->get_record_sql($sql_query);
-        return $query_result->timeclose;
-    }
-
     public function define_list_support_text() {
-        if (!empty($this->config->list_7) && ($this->get_timeclose_quiz($this->config->list_7) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_7))) {
+        if (!empty($this->config->list_7) && (get_timeclose_quiz($this->config->list_7) != 0) && (time() > get_timeclose_quiz($this->config->list_7))) {
             return "Quiz 7";
-        } elseif (!empty($this->config->list_6) && ($this->get_timeclose_quiz($this->config->list_6) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_6))) {
+        } elseif (!empty($this->config->list_6) && (get_timeclose_quiz($this->config->list_6) != 0) && (time() > get_timeclose_quiz($this->config->list_6))) {
             return "Quiz 6";
-        } elseif (!empty($this->config->list_5) && ($this->get_timeclose_quiz($this->config->list_5) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_5))) {
+        } elseif (!empty($this->config->list_5) && (get_timeclose_quiz($this->config->list_5) != 0) && (time() > get_timeclose_quiz($this->config->list_5))) {
             return "Quiz 5";
-        } elseif (!empty($this->config->list_4) && ($this->get_timeclose_quiz($this->config->list_4) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_4))) {
+        } elseif (!empty($this->config->list_4) && (get_timeclose_quiz($this->config->list_4) != 0) && (time() > get_timeclose_quiz($this->config->list_4))) {
             return "Quiz 4";
-        } elseif (!empty($this->config->list_3) && ($this->get_timeclose_quiz($this->config->list_3) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_3))) {
+        } elseif (!empty($this->config->list_3) && (get_timeclose_quiz($this->config->list_3) != 0) && (time() > get_timeclose_quiz($this->config->list_3))) {
             return "Quiz 3";
-        } elseif (!empty($this->config->list_2) && ($this->get_timeclose_quiz($this->config->list_2) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_2))) {
+        } elseif (!empty($this->config->list_2) && (get_timeclose_quiz($this->config->list_2) != 0) && (time() > get_timeclose_quiz($this->config->list_2))) {
             return "Quiz 2";
         } else {
-            return "Quiz 1 Nota: " . $this->get_user_grade($this->config->list_1);
+            return "Quiz 1 Nota: " . get_user_grade($this->config->list_1);
         }
     }
 
