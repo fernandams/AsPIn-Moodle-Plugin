@@ -114,7 +114,7 @@ class block_introcomputerscience extends block_base {
 
         if (has_capability('moodle/course:update', $context, $USER->id)) {
             $this->content->text = $this->define_teacher_text();
-        } elseif (!empty($this->config->list_1) && ($this->get_timeclose_quiz($this->config->list_1) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_1))) {
+        } elseif (!empty($this->config->list_1) && (get_timeclose_quiz($this->config->list_1) != 0) && (time() > get_timeclose_quiz($this->config->list_1))) {
             $this->content->text = $this->define_list_support_text();
         } else {
             $this->content->text = $this->define_initial_text();
