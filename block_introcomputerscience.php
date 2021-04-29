@@ -3,23 +3,22 @@
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->libdir.'/gradelib.php');
 
+
 class block_introcomputerscience extends block_base {
     public function init() {
         $this->title = get_string('introcomputerscience', 'block_introcomputerscience');
     }
 
-    public function get_user_grade() {
+    public function get_user_grade($quiz_id) {
         global $USER, $COURSE;
-        $selected_quiz = null;
-        
-        if (!empty($this->config->selected_quiz)) {
-            $selected_quiz = $this->config->selected_quiz;
+   
+        if (!empty($quiz_id)) {
 
             $user_id = $USER->id;
             $user_name = $USER->username;
             $course_id = $COURSE->id;
     
-            $grading_info = grade_get_grades($course_id, 'mod', 'quiz', $selected_quiz, $user_id);
+            $grading_info = grade_get_grades($course_id, 'mod', 'quiz', $quiz_id, $user_id);
      
             $user_grade = $grading_info->items[0]->grades[$user_id]->grade;
             
@@ -103,7 +102,7 @@ class block_introcomputerscience extends block_base {
         $secondary_text = '';
         $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . $this->get_quiz_module_id();
 
-        $user_grade = $this->get_user_grade();
+        $user_grade = $this->get_user_grade($this->config->selected_quiz);
 
         if (empty($this->config->selected_quiz)) { 
             return '';
@@ -154,7 +153,7 @@ class block_introcomputerscience extends block_base {
         } elseif (!empty($this->config->list_2) && ($this->get_timeclose_quiz($this->config->list_2) != 0) && (time() > $this->get_timeclose_quiz($this->config->list_2))) {
             return "Quiz 2";
         } else {
-            return "Quiz 1";
+            return "Quiz 1 Nota: " . $this->get_user_grade($this->config->list_1);
         }
     }
 
