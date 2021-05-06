@@ -83,7 +83,7 @@ class block_introcomputerscience extends block_base {
         return $presentation_text . $hr . $main_text . $recommended_list . $secondary_text;
     }
 
-    public function define_list_support_text() {
+    public function define_after_list_support_text() {
         $presentation_text = '<p class="ics-light-text">Olá! Sou seu Assistente nesta disciplina. Meu objetivo é te auxiliar no seu processo de aprendizado!</p>';
         $hr = '<hr/>';
         $main_text = '';
@@ -181,6 +181,58 @@ class block_introcomputerscience extends block_base {
         return $presentation_text . $hr . $main_text . $subjects_text;
     }
 
+    public function define_before_list_support_text() {
+        $hr = '<hr/>';
+        $main_text = '';
+        $recommended_text = '';
+        $secondary_text = '<p class="ics-light-text">Busque separar um tempo para realizar esses exercícios. Aprender a programar te prepara não só para seu curso, mas também para seu futuro!</p>';
+        
+        $selected_quiz = $this->config->selected_quiz;
+        $list_1 = $this->config->list_1;
+        $list_2 = $this->config->list_2;
+        $list_3 = $this->config->list_3;
+        $list_4 = $this->config->list_4;
+        $list_5 = $this->config->list_5;
+        $list_6 = $this->config->list_6;
+        $list_7 = $this->config->list_7;
+
+        if (empty(get_user_grade($selected_quiz))) {
+            return '';
+        } elseif (time() < get_timeclose_quiz($list_1) && empty(get_user_grade($list_1))) {
+            $main_text = '<p>Lembre-se que a próxima lista é sobre Variáveis e Expressões. Isso pode te ajudar a estudar:</p>';
+            $recommended_text = '<ul class="ics-list"><li><a href="https://youtube.com">Exercícios contextualizados de Variáveis e Expressões.</a></li></ul>';
+
+        } elseif (time() < get_timeclose_quiz($list_2) && empty(get_user_grade($list_2))) {
+            $main_text = '<p>Lembre-se que a próxima lista é sobre Estrutura de Decisão. Isso pode te ajudar a estudar:</p>';
+            $recommended_text = '<ul class="ics-list"><li><a href="https://youtube.com">Exercícios contextualizados de Estrutura de Decisão.</a></li></ul>';
+
+        }  elseif (time() < get_timeclose_quiz($list_3) && empty(get_user_grade($list_3))) {
+            $main_text = '<p>Lembre-se que a próxima lista é sobre Estrutura de Repetição. Isso pode te ajudar a estudar:</p>';
+            $recommended_text = '<ul class="ics-list"><li><a href="https://youtube.com">Exercícios contextualizados de Estrutura de Repetição.</a></li></ul>';
+
+        }  elseif (time() < get_timeclose_quiz($list_4) && empty(get_user_grade($list_4))) {
+            $main_text = '<p>Lembre-se que a próxima lista é sobre Funções. Isso pode te ajudar a estudar:</p>';
+            $recommended_text = '<ul class="ics-list"><li><a href="https://youtube.com">Exercícios contextualizados de Funções.</a></li></ul>';
+
+        }  elseif (time() < get_timeclose_quiz($list_5) && empty(get_user_grade($list_5))) {
+            $main_text = '<p>Lembre-se que a próxima lista é sobre Strings. Isso pode te ajudar a estudar:</p>';
+            $recommended_text = '<ul class="ics-list"><li><a href="https://youtube.com">Exercícios contextualizados de Strings.</a></li></ul>';
+
+        }  elseif (time() < get_timeclose_quiz($list_6) && empty(get_user_grade($list_6))) {
+            $main_text = '<p>Lembre-se que a próxima lista é sobre Listas. Isso pode te ajudar a estudar:</p>';
+            $recommended_text = '<ul class="ics-list"><li><a href="https://youtube.com">Exercícios contextualizados de Listas.</a></li></ul>';
+
+        } elseif (time() < get_timeclose_quiz($list_7) && empty(get_user_grade($list_7))) {
+            $main_text = '<p>Lembre-se que a próxima lista é sobre Tuplas e Dicionários. Isso pode te ajudar a estudar:</p>';
+            $recommended_text = '<ul class="ics-list"><li><a href="https://youtube.com">Exercícios contextualizados de Tuplas e Dicionários.</a></li></ul>';
+
+        } else {
+            return '';
+        }
+
+        return $hr . $main_text . $recommended_text . $secondary_text;
+    } 
+
     public function get_content() {
         global $CFG, $USER, $COURSE;
 
@@ -195,9 +247,9 @@ class block_introcomputerscience extends block_base {
         if (has_capability('moodle/course:update', $context, $USER->id)) {
             $this->content->text = $this->define_teacher_text();
         } elseif (!empty($this->config->list_1) && (get_timeclose_quiz($this->config->list_1) != 0) && (time() > get_timeclose_quiz($this->config->list_1))) {
-            $this->content->text = $this->define_list_support_text();
+            $this->content->text = $this->define_after_list_support_text() . $this->define_before_list_support_text();
         } else {
-            $this->content->text = $this->define_initial_text();
+            $this->content->text = $this->define_initial_text() . $this->define_before_list_support_text();
         }
         
         return $this->content;

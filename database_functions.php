@@ -29,14 +29,6 @@ function get_quiz_module_id($selected_quiz) {
     }
 }
 
-function get_timeopen_quiz($quiz_id) {
-    global $COURSE, $DB;
-
-    $sql_query = 'select timeopen from mdl_quiz where course = ' . $COURSE->id . ' and id = ' . $quiz_id . ';';
-    $query_result = $DB->get_record_sql($sql_query);
-    return $query_result->timeopen;
-}
-
 function get_timeclose_quiz($quiz_id) {
     global $COURSE, $DB;
 
