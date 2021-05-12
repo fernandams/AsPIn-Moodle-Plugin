@@ -55,3 +55,11 @@ function get_user_grade($quiz_id) {
         return null;
     }
 }
+
+function set_stealth_module() {
+    global $DB, $COURSE, $CFG;
+
+    $CFG->allowstealth = 1;
+    $DB->set_field('course_modules', 'visibleoncoursepage', 0, ['id' => 18]);
+    rebuild_course_cache($COURSE->id, true);
+}
