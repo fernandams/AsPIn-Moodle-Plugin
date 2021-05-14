@@ -56,10 +56,27 @@ function get_user_grade($quiz_id) {
     }
 }
 
-function set_stealth_module() {
+function set_stealth_module($mod_id) {
     global $DB, $COURSE, $CFG;
 
     $CFG->allowstealth = 1;
-    $DB->set_field('course_modules', 'visibleoncoursepage', 0, ['id' => 18]);
+    $DB->set_field('course_modules', 'visibleoncoursepage', 0, ['id' => $mod_id]);
+    rebuild_course_cache($COURSE->id, true);
+}
+
+function set_grade_condition_availability($mod_id, $quiz_id, $is_min) {
+    global $DB, $COURSE; 
+    
+    $sql_query = 'select id from mdl_grade_items where iteminstance = ' . $quiz_id . ';';
+    $query_result = $DB->get_record_sql($sql_query);
+    $item_id = $query_result->id;
+
+    if ($is_min) {
+        $restriction = '{"op":"&","c":[{"type":"grade","id":' . $item_id . ',"min":50}],"showc":[false]}';
+    } else {
+        $restriction = '{"op":"&","c":[{"type":"grade","id":' . $item_id . ',"max":50}],"showc":[false]}';
+    }
+   
+    $DB->set_field('course_modules', 'availability', $restriction, ['id' => $mod_id]);
     rebuild_course_cache($COURSE->id, true);
 }

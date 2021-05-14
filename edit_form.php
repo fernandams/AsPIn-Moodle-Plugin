@@ -34,5 +34,12 @@ class block_introcomputerscience_edit_form extends block_edit_form {
         $mform->addElement('select', 'config_list_6', get_string('config_list_6', 'block_introcomputerscience'), $options);
          
         $mform->addElement('select', 'config_list_7', get_string('config_list_7', 'block_introcomputerscience'), $options);
+
+        $mform->addElement('html', '<hr/>');
+
+        $mform->addElement('html', '<p>' . get_string('config_not_math_instruction', 'block_introcomputerscience') . '</p> <br/>');
+
+        $mform->addElement('select', 'config_list_1_not_math', get_string('config_list_1_not_math', 'block_introcomputerscience'), $options);
+         
     }
 }

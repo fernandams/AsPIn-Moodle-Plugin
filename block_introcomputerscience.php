@@ -8,6 +8,11 @@ class block_introcomputerscience extends block_base {
         $this->title = get_string('introcomputerscience', 'block_introcomputerscience');
     }
 
+    public function specialization() {
+        set_grade_condition_availability(get_quiz_module_id($this->config->list_1), $this->config->selected_quiz, 1);
+        set_grade_condition_availability(get_quiz_module_id($this->config->list_1_not_math), $this->config->selected_quiz, 0);
+    }
+
     public function define_teacher_text() {
         global $CFG;
 
