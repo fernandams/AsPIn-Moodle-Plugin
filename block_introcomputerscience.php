@@ -9,8 +9,23 @@ class block_introcomputerscience extends block_base {
     }
 
     public function specialization() {
-        set_grade_condition_availability(get_quiz_module_id($this->config->list_1), $this->config->selected_quiz, 1);
-        set_grade_condition_availability(get_quiz_module_id($this->config->list_1_not_math), $this->config->selected_quiz, 0);
+        // Para listas de matemática  
+        set_grade_condition_availability(get_quiz_module_id($this->config->list_1), $this->config->selected_quiz, 0);
+        // Para listas de outros cursos
+        set_grade_condition_availability(get_quiz_module_id($this->config->list_1_not_math), $this->config->selected_quiz, 1);
+    }
+
+    public function is_student_from_aimed_course() {
+        if (empty($this->config->selected_quiz)) {
+            return false;
+        } else {
+            $user_grade = get_user_grade($this->config->selected_quiz);
+            if ($user_grade < 5) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     public function define_teacher_text() {
@@ -251,6 +266,8 @@ class block_introcomputerscience extends block_base {
 
         if (has_capability('moodle/course:update', $context, $USER->id)) {
             $this->content->text = $this->define_teacher_text();
+        } elseif (!($this->is_student_from_aimed_course())) {
+            $this->content->text = '';
         } elseif (!empty($this->config->list_1) && (get_timeclose_quiz($this->config->list_1) != 0) && (time() > get_timeclose_quiz($this->config->list_1))) {
             $this->content->text = $this->define_after_list_support_text() . $this->define_before_list_support_text();
         } else {

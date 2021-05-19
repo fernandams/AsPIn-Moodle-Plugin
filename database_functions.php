@@ -72,8 +72,10 @@ function set_grade_condition_availability($mod_id, $quiz_id, $is_min) {
     $item_id = $query_result->id;
 
     if ($is_min) {
+        // caso do aluno fora da matemática
         $restriction = '{"op":"&","c":[{"type":"grade","id":' . $item_id . ',"min":50}],"showc":[false]}';
     } else {
+        // caso do aluno da matemática
         $restriction = '{"op":"&","c":[{"type":"grade","id":' . $item_id . ',"max":50}],"showc":[false]}';
     }
    
