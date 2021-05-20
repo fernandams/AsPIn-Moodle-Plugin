@@ -1,6 +1,6 @@
 <?php
 $plugin->component = 'block_introcomputerscience';  
-$plugin->version = 2021051901;  // YYYYMMDDHH (year, month, day, 24-hr time)
+$plugin->version = 2021051902;  // YYYYMMDDHH (year, month, day, 24-hr time)
 $plugin->requires  = 2019111800; // YYYYMMDDHH (This is the release version for Moodle 3.8.5)
 $plugin->maturity  = MATURITY_ALPHA;
 $plugin->release   = 'v0.2';

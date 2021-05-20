@@ -79,7 +79,8 @@ class block_introcomputerscience extends block_base {
         if (empty($this->config->selected_quiz)) { 
             return '';
         } elseif (empty($user_grade)) {
-            $main_text = '<p>Para que possamos trabalhar bem juntos, preciso que você responda o <a href="' . $quiz_link . '">Formulário de Percepção</a>.</p>';
+            $presentation_text = '<p class="ics-light-text">Olá! Sou o Assistente de ICC, um plugin desenvolvido por alunos de Ciência da Computação. E preciso da sua ajuda!</p>';
+            $main_text = '<p>Para que eu possa te conhecer melhor, preciso que você responda o <a href="' . $quiz_link . '">Formulário de Percepção</a>.</p>';
 
             $secondary_text = '<p class="ics-light-text">Em caso de dúvidas, procure seu professor, tutor ou monitor.</p>';
         } elseif ($user_grade == 4) {
