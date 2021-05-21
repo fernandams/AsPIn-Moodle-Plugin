@@ -9,10 +9,12 @@ class block_introcomputerscience extends block_base {
     }
 
     public function specialization() {
-        // Para listas de matemática  
-        set_grade_condition_availability(get_quiz_module_id($this->config->list_1), $this->config->selected_quiz, 0);
-        // Para listas de outros cursos
-        set_grade_condition_availability(get_quiz_module_id($this->config->list_1_not_math), $this->config->selected_quiz, 1);
+        if (!empty($this->config->list_1) && !empty($this->config->list_1_not_math) && !empty($this->config->selected_quiz)) {
+            // Para listas de matemática  
+            set_grade_condition_availability(get_quiz_module_id($this->config->list_1), $this->config->selected_quiz, 0);
+            // Para listas de outros cursos
+            set_grade_condition_availability(get_quiz_module_id($this->config->list_1_not_math), $this->config->selected_quiz, 1);
+        }
     }
 
     public function is_student_from_aimed_course() {
