@@ -16,3 +16,6 @@ $string['config_list_4'] = 'Lista 4 - Funções';
 $string['config_list_5'] = 'Lista 5 - Strings';
 $string['config_list_6'] = 'Lista 6 - Listas';
 $string['config_list_7'] = 'Lista 7 - Tuplas e Dicionários';
+
+$string['config_section_text'] = 'Selecione a seção a ser utilizada para apresentar o conteúdo introdutório ao pensamento computacional:';
+$string['config_section'] = 'Seção';

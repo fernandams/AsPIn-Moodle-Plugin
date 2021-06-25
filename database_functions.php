@@ -56,6 +56,24 @@ function get_user_grade($quiz_id) {
     }
 }
 
+function get_quiz_options(){
+    global $COURSE, $DB;
+
+    $sql_query = 'select id, name from mdl_quiz where course =' . $COURSE->id . ';';
+    $query_result = $DB->get_records_sql($sql_query);
+
+    return $query_result;
+}
+
+function get_section_options(){
+    global $COURSE, $DB;
+    
+    $sql_query = 'select id, name from mdl_course_sections where course =' . $COURSE->id . ';';
+    $query_result = $DB->get_records_sql($sql_query);
+
+    return $query_result;
+}
+
 function set_stealth_module($mod_id) {
     global $DB, $COURSE, $CFG;
 
