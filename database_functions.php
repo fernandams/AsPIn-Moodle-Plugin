@@ -29,6 +29,19 @@ function get_quiz_module_id($selected_quiz) {
     }
 }
 
+function get_section_number($selected_section) {
+    global $DB, $COURSE;
+    
+    if (!empty($selected_section)) {
+        $sql_query = 'select section from mdl_course_sections where id = ' . $selected_section . ';';
+        $query_result = $DB->get_record_sql($sql_query);   
+       
+        return $query_result->section;
+    } else {
+        return null;
+    }
+}
+
 function get_timeclose_quiz($quiz_id) {
     global $COURSE, $DB;
 
@@ -82,21 +95,18 @@ function set_stealth_module($mod_id) {
     rebuild_course_cache($COURSE->id, true);
 }
 
-function set_grade_condition_availability($mod_id, $quiz_id, $is_min) {
+function set_grade_condition_availability($mod_id, $quiz_id) {
     global $DB, $COURSE; 
     
     $sql_query = 'select id from mdl_grade_items where iteminstance = ' . $quiz_id . ';';
     $query_result = $DB->get_record_sql($sql_query);
     $item_id = $query_result->id;
 
-    if ($is_min) {
-        // caso do aluno fora da matemática
-        $restriction = '{"op":"&","c":[{"type":"grade","id":' . $item_id . ',"min":50}],"showc":[false]}';
-    } else {
-        // caso do aluno da matemática
-        $restriction = '{"op":"&","c":[{"type":"grade","id":' . $item_id . ',"max":50}],"showc":[false]}';
-    }
+        // verificar se o aluno respondeu p form de percepção
+        //      se não tiver nota ou nota == 0, esconder a seção
+        //      se tiver tirado pelo menos 1, mostrar a seção
+    $restriction = '{"op":"&","c":[{"type":"grade","id":' . $item_id . ',"min":25}],"showc":[false]}';
    
-    $DB->set_field('course_modules', 'availability', $restriction, ['id' => $mod_id]);
+    $DB->set_field('course_sections', 'availability', $restriction, ['id' => $mod_id]);
     rebuild_course_cache($COURSE->id, true);
 }

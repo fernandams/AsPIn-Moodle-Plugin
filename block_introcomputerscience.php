@@ -8,14 +8,11 @@ class block_introcomputerscience extends block_base {
         $this->title = get_string('introcomputerscience', 'block_introcomputerscience');
     }
 
-    // public function specialization() {
-    //     if (!empty($this->config->list_1) && !empty($this->config->list_1_not_math) && !empty($this->config->selected_quiz)) {
-    //         // Para listas de matemática  
-    //         set_grade_condition_availability(get_quiz_module_id($this->config->list_1), $this->config->selected_quiz, 0);
-    //         // Para listas de outros cursos
-    //         set_grade_condition_availability(get_quiz_module_id($this->config->list_1_not_math), $this->config->selected_quiz, 1);
-    //     }
-    // }
+    public function specialization() {
+        if (!empty($this->config->section) && !empty($this->config->selected_quiz)) {
+            set_grade_condition_availability($this->config->section, $this->config->selected_quiz);
+        }
+    }
 
     // public function is_student_from_aimed_course() {
     //     if (empty($this->config->selected_quiz)) {
@@ -67,33 +64,41 @@ class block_introcomputerscience extends block_base {
     }
 
     public function define_initial_text() {
-        global $CFG;
+        global $CFG, $COURSE;
 
         $presentation_text = '<p class="ics-light-text">Olá! Sou seu Assistente nesta disciplina. Meu objetivo é te auxiliar no seu processo de aprendizado!</p>';
         $hr = '<hr/>';
         $main_text = '';
         $secondary_text = '';
-        $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($this->config->selected_quiz);
 
         $user_grade = get_user_grade($this->config->selected_quiz);
 
         if (empty($this->config->selected_quiz)) { 
             return '';
         } elseif (empty($user_grade)) {
+            $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($this->config->selected_quiz);
+    
             $presentation_text = '<p class="ics-light-text">Olá! Sou o Assistente de ICC, um plugin desenvolvido por alunos de Ciência da Computação. E preciso da sua ajuda!</p>';
             $main_text = '<p>Para que eu possa te conhecer melhor, preciso que você responda o <a href="' . $quiz_link . '">Formulário de Percepção</a>.</p>';
 
             $secondary_text = '<p class="ics-light-text">Em caso de dúvidas, procure seu professor, tutor ou monitor.</p>';
-        } elseif ($user_grade == 4) {
+
+        } elseif ($user_grade == 0) {
             $main_text = '<p>Não tenho nenhuma recomendação para você no momento, bons estudos!</p>';
 
             $secondary_text = '<p class="ics-light-text">Em caso de dúvidas, procure seu professor, tutor ou monitor.</p>';
-        } elseif (( $user_grade == 2) || ($user_grade == 3)) {
-            $main_text = '<p>Mesmo que você já saiba pelo menos um pouquinho de programação, sugiro que você dedique um pouco de tempo na seção Pensando como um computador que adicionei para você. </p>';
+
+        } elseif (( $user_grade == 1) || ($user_grade == 2)) {
+            $section_link = $CFG->wwwroot . '/course/view.php?id=' . $COURSE->id . '#section-' . get_section_number($this->config->section);
+
+            $main_text = '<p>Mesmo que você já saiba pelo menos um pouquinho de programação, sugiro que você dedique um pouco de tempo na seção <a href="' . $section_link . '">Pensando como um computador</a> que adicionei para você. </p>';
 
             $secondary_text = '<p class="ics-light-text">É importante que você dê uma olhada nesses conteúdos curtinhos. Fortalecer esses conceitos pode acelerar o seu desempenho nas atividades futuras da disciplina.</p>';
-        } elseif (($user_grade == 0) || ($user_grade == 1)) {
-            $main_text = '<p>Antes de iniciar seus estudos, sugiro que você dedique um pouco de tempo na seção Pensando como um computador que adicionei para você.</p>';
+
+        } elseif (($user_grade == 3) || ($user_grade == 4)) {
+            $section_link = $CFG->wwwroot . '/course/view.php?id=' . $COURSE->id . '#section-' . get_section_number($this->config->section);
+
+            $main_text = '<p>Antes de iniciar seus estudos, sugiro que você dedique um pouco de tempo na seção <a href="' . $section_link . '">Pensando como um computador</a> que adicionei para você.</p>';
 
             $secondary_text = '<p class="ics-light-text">É importante que você dê uma olhada nesses conteúdos curtinhos. Trabalhar esses conceitos pode acelerar o seu desempenho nas atividades futuras da disciplina.</p>';
         }
