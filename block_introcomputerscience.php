@@ -70,12 +70,15 @@ class block_introcomputerscience extends block_base {
         $hr = '<hr/>';
         $main_text = '';
         $secondary_text = '';
-
-        $user_grade = get_user_grade($this->config->selected_quiz);
-
+        $user_grade = 0;
+        
         if (empty($this->config->selected_quiz)) { 
             return '';
-        } elseif (empty($user_grade)) {
+        } else {     
+            $user_grade = get_user_grade($this->config->selected_quiz);
+        } 
+        
+        if (empty($user_grade)) {
             $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($this->config->selected_quiz);
     
             $presentation_text = '<p class="ics-light-text">Olá! Sou o Assistente de ICC, um plugin desenvolvido por alunos de Ciência da Computação. E preciso da sua ajuda!</p>';
@@ -188,57 +191,61 @@ class block_introcomputerscience extends block_base {
         $main_text = '';
         $secondary_text = '<p class="ics-light-text">Busque separar um tempo para praticar os exercícios das listas. Aprender a programar te prepara não só para seu curso, mas também para seu futuro!</p>';
         
-        $selected_quiz = $this->config->selected_quiz;
-        $list_1 = $this->config->list_1;
-        $list_2 = $this->config->list_2;
-        $list_3 = $this->config->list_3;
-        $list_4 = $this->config->list_4;
-        $list_5 = $this->config->list_5;
-        $list_6 = $this->config->list_6;
-        $list_7 = $this->config->list_7;
+        if (!empty($this->config->selected_quiz)) { 
+            $selected_quiz = $this->config->selected_quiz;
+            $list_1 = $this->config->list_1;
+            $list_2 = $this->config->list_2;
+            $list_3 = $this->config->list_3;
+            $list_4 = $this->config->list_4;
+            $list_5 = $this->config->list_5;
+            $list_6 = $this->config->list_6;
+            $list_7 = $this->config->list_7;
 
-        if (empty(get_user_grade($selected_quiz))) {
-            return '';
-        } elseif (time() < get_timeclose_quiz($list_1) && empty(get_user_grade($list_1))) {
-            $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_1);
+            if (empty(get_user_grade($selected_quiz))) {
+                return '';
+            } elseif (time() < get_timeclose_quiz($list_1) && empty(get_user_grade($list_1))) {
+                $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_1);
 
-            $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Variáveis e Expressões</a>.</p>';
+                $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Variáveis e Expressões</a>.</p>';
 
-        } elseif (time() < get_timeclose_quiz($list_2) && empty(get_user_grade($list_2))) {
-            $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_2);
+            } elseif (time() < get_timeclose_quiz($list_2) && empty(get_user_grade($list_2))) {
+                $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_2);
 
-            $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Estrutura de Decisão</a>.</p>';
+                $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Estrutura de Decisão</a>.</p>';
 
-        }  elseif (time() < get_timeclose_quiz($list_3) && empty(get_user_grade($list_3))) {
-            $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_3);
+            }  elseif (time() < get_timeclose_quiz($list_3) && empty(get_user_grade($list_3))) {
+                $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_3);
 
-            $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Estrutura de Repetição</a>.</p>';
+                $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Estrutura de Repetição</a>.</p>';
 
-        }  elseif (time() < get_timeclose_quiz($list_4) && empty(get_user_grade($list_4))) {
-            $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_4);
+            }  elseif (time() < get_timeclose_quiz($list_4) && empty(get_user_grade($list_4))) {
+                $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_4);
 
-            $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Funções</a>.</p>';
+                $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Funções</a>.</p>';
 
-        }  elseif (time() < get_timeclose_quiz($list_5) && empty(get_user_grade($list_5))) {
-            $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_5);
+            }  elseif (time() < get_timeclose_quiz($list_5) && empty(get_user_grade($list_5))) {
+                $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_5);
 
-            $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Strings</a>.</p>';
+                $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Strings</a>.</p>';
 
-        }  elseif (time() < get_timeclose_quiz($list_6) && empty(get_user_grade($list_6))) {
-            $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_6);
+            }  elseif (time() < get_timeclose_quiz($list_6) && empty(get_user_grade($list_6))) {
+                $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_6);
 
-            $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Listas</a>.</p>';
+                $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Listas</a>.</p>';
 
-        } elseif (time() < get_timeclose_quiz($list_7) && empty(get_user_grade($list_7))) {
-            $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_7);
+            } elseif (time() < get_timeclose_quiz($list_7) && empty(get_user_grade($list_7))) {
+                $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($list_7);
 
-            $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Tuplas e Dicionários</a>.</p>';
+                $main_text = '<p>Lembre-se que a próxima lista é sobre <a href="' . $quiz_link . '">Tuplas e Dicionários</a>.</p>';
 
+            } else {
+                return '';
+            }
+
+            return $hr . $main_text . $secondary_text;
         } else {
             return '';
         }
-
-        return $hr . $main_text . $secondary_text;
     } 
 
     public function get_content() {
