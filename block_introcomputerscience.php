@@ -123,41 +123,9 @@ class block_introcomputerscience extends block_base {
         $list_6 = $this->config->list_6;
         $list_7 = $this->config->list_7;
 
-        if (!empty($list_1) && (get_timeclose_quiz($list_1) != 0) && (time() > get_timeclose_quiz($list_1))) {
-            if (get_user_grade($list_1) > 5) {
-                $main_text = '<p>Parabéns pelo seu desempenho na lista 1! Continue assim!</p>';
-                $secondary_text = '';
-            } else {
-                $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue</p>';
-                $secondary_text = '<p class="ics-light-text">Se você sentir que precisa de ajuda, não hesite em procurar o(a) professor(a) ou os monitores da disciplina. Eles estão aqui para te ajudar.</p>';
-            }
-        } elseif (!empty($list_2) && (get_timeclose_quiz($list_2) != 0) && (time() > get_timeclose_quiz($list_2))) {
-            if (get_user_grade($list_2) > 5) {
-                $main_text = '<p>Parabéns pelo seu desempenho na lista 2! Continue assim!</p>';
-                $secondary_text = '';
-            } else {
-                $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue!</p>';
-                $secondary_text = '<p class="ics-light-text">Se você sentir que precisa de ajuda, não hesite em procurar o(a) professor(a) ou os monitores da disciplina. Eles estão aqui para te ajudar.</p>';
-            }
-        } elseif (!empty($list_3) && (get_timeclose_quiz($list_3) != 0) && (time() > get_timeclose_quiz($list_3))) {
-            if (get_user_grade($list_3) > 5) {
-                $main_text = '<p>Parabéns pelo seu desempenho na lista 3! Continue assim!</p>';
-                $secondary_text = '';
-            } else {
-                $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue!</p>';
-                $secondary_text = '<p class="ics-light-text">Se você sentir que precisa de ajuda, não hesite em procurar o(a) professor(a) ou os monitores da disciplina. Eles estão aqui para te ajudar.</p>';
-            }
-        } elseif (!empty($list_4) && (get_timeclose_quiz($list_4) != 0) && (time() > get_timeclose_quiz($list_4))) {
-            if (get_user_grade($list_4) > 5) {
-                $main_text = '<p>Parabéns pelo seu desempenho na lista 4! Continue assim!</p>';
-                $secondary_text = '';
-            } else {
-                $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue!</p>';
-                $secondary_text = '<p class="ics-light-text">Se você sentir que precisa de ajuda, não hesite em procurar o(a) professor(a) ou os monitores da disciplina. Eles estão aqui para te ajudar.</p>';
-            }
-        } elseif (!empty($list_5) && (get_timeclose_quiz($list_5) != 0) && (time() > get_timeclose_quiz($list_5))) {
-            if (get_user_grade($list_5) > 5) {
-                $main_text = '<p>Parabéns pelo seu desempenho na lista 5! Continue assim!</p>';
+        if (!empty($list_7) && (get_timeclose_quiz($list_7) != 0) && (time() > get_timeclose_quiz($list_7))) {
+            if (get_user_grade($list_7) > 5) {
+                $main_text = '<p>Parabéns pelo seu desempenho na lista 7! Continue assim!</p>';
                 $secondary_text = '';
             } else {
                 $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue!</p>';
@@ -171,16 +139,48 @@ class block_introcomputerscience extends block_base {
                 $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue!</p>';
                 $secondary_text = '<p class="ics-light-text">Se você sentir que precisa de ajuda, não hesite em procurar o(a) professor(a) ou os monitores da disciplina. Eles estão aqui para te ajudar.</p>';
             }
-        } elseif (!empty($list_7) && (get_timeclose_quiz($list_7) != 0) && (time() > get_timeclose_quiz($list_7))) {
-            if (get_user_grade($list_7) > 5) {
-                $main_text = '<p>Parabéns pelo seu desempenho na lista 7! Continue assim!</p>';
+        } elseif (!empty($list_5) && (get_timeclose_quiz($list_5) != 0) && (time() > get_timeclose_quiz($list_5))) {
+            if (get_user_grade($list_5) > 5) {
+                $main_text = '<p>Parabéns pelo seu desempenho na lista 5! Continue assim!</p>';
                 $secondary_text = '';
             } else {
                 $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue!</p>';
                 $secondary_text = '<p class="ics-light-text">Se você sentir que precisa de ajuda, não hesite em procurar o(a) professor(a) ou os monitores da disciplina. Eles estão aqui para te ajudar.</p>';
             }
-        } 
-
+        } elseif (!empty($list_4) && (get_timeclose_quiz($list_4) != 0) && (time() > get_timeclose_quiz($list_4))) {
+            if (get_user_grade($list_4) > 5) {
+                $main_text = '<p>Parabéns pelo seu desempenho na lista 4! Continue assim!</p>';
+                $secondary_text = '';
+            } else {
+                $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue!</p>';
+                $secondary_text = '<p class="ics-light-text">Se você sentir que precisa de ajuda, não hesite em procurar o(a) professor(a) ou os monitores da disciplina. Eles estão aqui para te ajudar.</p>';
+            }
+        } elseif (!empty($list_3) && (get_timeclose_quiz($list_3) != 0) && (time() > get_timeclose_quiz($list_3))) {
+            if (get_user_grade($list_3) > 5) {
+                $main_text = '<p>Parabéns pelo seu desempenho na lista 3! Continue assim!</p>';
+                $secondary_text = '';
+            } else {
+                $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue!</p>';
+                $secondary_text = '<p class="ics-light-text">Se você sentir que precisa de ajuda, não hesite em procurar o(a) professor(a) ou os monitores da disciplina. Eles estão aqui para te ajudar.</p>';
+            }
+        } elseif (!empty($list_2) && (get_timeclose_quiz($list_2) != 0) && (time() > get_timeclose_quiz($list_2))) {
+            if (get_user_grade($list_2) > 5) {
+                $main_text = '<p>Parabéns pelo seu desempenho na lista 2! Continue assim!</p>';
+                $secondary_text = '';
+            } else {
+                $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue!</p>';
+                $secondary_text = '<p class="ics-light-text">Se você sentir que precisa de ajuda, não hesite em procurar o(a) professor(a) ou os monitores da disciplina. Eles estão aqui para te ajudar.</p>';
+            }
+        } elseif (!empty($list_1) && (get_timeclose_quiz($list_1) != 0) && (time() > get_timeclose_quiz($list_1))) {
+            if (get_user_grade($list_1) > 5) {
+                $main_text = '<p>Parabéns pelo seu desempenho na lista 1! Continue assim!</p>';
+                $secondary_text = '';
+            } else {
+                $main_text = '<p>Parabéns pelo seu esforço! Aprender a programar pode ser difícil, mas tenho certeza que com persistência você consegue</p>';
+                $secondary_text = '<p class="ics-light-text">Se você sentir que precisa de ajuda, não hesite em procurar o(a) professor(a) ou os monitores da disciplina. Eles estão aqui para te ajudar.</p>';
+            }
+        }
+        
         return $presentation_text . $hr . $main_text . $secondary_text;
     }
 
