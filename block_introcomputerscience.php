@@ -66,7 +66,7 @@ class block_introcomputerscience extends block_base {
     public function define_initial_text() {
         global $CFG, $COURSE;
 
-        $presentation_text = '<p class="ics-light-text">Olá! Sou seu Assistente nesta disciplina. Meu objetivo é te auxiliar no seu processo de aprendizado!</p>';
+        $presentation_text = '<p class="ics-light-text">Olá! Sou o AsPIn, seu assistente nesta disciplina. Meu objetivo é te auxiliar no seu processo de aprendizado!</p>';
         $hr = '<hr/>';
         $main_text = '';
         $secondary_text = '';
@@ -81,7 +81,7 @@ class block_introcomputerscience extends block_base {
         if (empty($user_grade)) {
             $quiz_link = $CFG->wwwroot . '/mod/quiz/view.php?id=' . get_quiz_module_id($this->config->selected_quiz);
     
-            $presentation_text = '<p class="ics-light-text">Olá! Sou o Assistente de ICC, um plugin desenvolvido por alunos de Ciência da Computação. E preciso da sua ajuda!</p>';
+            $presentation_text = '<p class="ics-light-text">Olá! Sou o AsPIn, seu assistente de ICC! Sou um plugin desenvolvido por alunos de Ciência da Computação e preciso da sua ajuda!</p>';
             $main_text = '<p>Para que eu possa te conhecer melhor, preciso que você responda o <a href="' . $quiz_link . '">Formulário de Percepção</a>.</p>';
 
             $secondary_text = '<p class="ics-light-text">Em caso de dúvidas, procure seu professor, tutor ou monitor.</p>';
@@ -110,7 +110,7 @@ class block_introcomputerscience extends block_base {
     }
 
     public function define_after_list_support_text() {
-        $presentation_text = '<p class="ics-light-text">Olá! Sou seu Assistente nesta disciplina. Meu objetivo é te auxiliar no seu processo de aprendizado!</p>';
+        $presentation_text = '<p class="ics-light-text">Olá! Sou o AsPIn, seu assistente nesta disciplina. Meu objetivo é te auxiliar no seu processo de aprendizado!</p>';
         $hr = '<hr/>';
         $main_text = '';
         $secondary_text = '';
