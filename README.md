@@ -1,5 +1,5 @@
 # AsPIn - Moodle Plugin
-Moodle block plugin assistant for CS1 students. Developed by undergraduate students for the University of Brasília's course Computer Science Introduction (Introdução à Ciência da Computação - ICC). This repository contains the plugin's source code and additional material developed along with this plugin.
+Moodle block plugin assistant for CS1 students called AsPIn (Introductory Programming Assistant - Assistente de Programação Introdutória). Developed by undergraduate students for the University of Brasília's course Computer Science Introduction (Introdução à Ciência da Computação - ICC). This repository contains the plugin's source code and additional material developed along with this plugin.
 
 ## How to install
 There's a bash file in this repository called `prepare-plugin`. Executing this file will generate a .zip file which can be uploaded to a Moodle instance: `bash prepare-plugin`.
