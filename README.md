@@ -8,7 +8,7 @@ There's a bash file in this repository called `prepare-plugin`. Executing this f
 
 The folder `Computational Thinking Material` contains a .pdf file that presents concepts associated with Computational Thinking. This [video](https://youtu.be/Ehb9qh1OLeU) belongs to this material pack.
 
-## Plugin functionalities and configuration
+## Plugin configuration
 It is important to emphasize that this code contains a series of hardcoded functionalities that are specific to our context.
 Once installed, the plugin block can be added to a course page as usual. 
 The block will be displayed to the student only after the configuration.
