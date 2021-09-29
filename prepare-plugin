@@ -1,0 +1,4 @@
+rm block_introcomputerscience.zip
+rm -r block_introcomputerscience/*
+cp -r db lang block_introcomputerscience.php edit_form.php database_functions.php version.php styles.css block_introcomputerscience
+zip -r block_introcomputerscience.zip block_introcomputerscience
