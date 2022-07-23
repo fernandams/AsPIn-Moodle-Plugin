@@ -38,9 +38,9 @@ class block_introcomputerscience extends block_base {
         if (empty($this->config->selected_quiz)) {
             $presentation_text = '<p class="ics-light-text">Olá, professor! Para que o Assistente funcione corretamente, preciso que você me configure. </p>';
             $main_text = '<ol class="ics-config-list">
-            <li>Clique no ícone de engrenagem da disciplina e selecione “Ativar edição”;</li>
+            <li>Ative o modo de edição da disciplina;</li>
 
-            <li>Com a edição ativada, clique na engrenagem deste bloco e selecione “Configurar bloco Assistente de ICC”;</li>
+            <li>Com a edição ativada, clique na engrenagem deste bloco e selecione “Configurar bloco AsPIn, o Assistente de ICC”;</li>
             
             <li>Na página de configuração, preencha a seção “Configurações do Bloco” de acordo com suas preferências.</li>
             </ol>
@@ -50,9 +50,9 @@ class block_introcomputerscience extends block_base {
         } else {
             $presentation_text = '<p class="ics-light-text">Olá, professor! Caso deseje alterar as configurações do Assistente, siga os passos abaixo.</p>';
             $main_text = '<ol dlass="ics-config-list">
-            <li>Clique no ícone de engrenagem da disciplina e selecione “Ativar edição”;</li>
+            <li>Ative o modo de edição da disciplina;</li>
 
-            <li>Com a edição ativada, clique na engrenagem deste bloco e selecione “Configurar bloco Assistente de ICC”;</li>
+            <li>Com a edição ativada, clique na engrenagem deste bloco e selecione “Configurar bloco AsPIn, o Assistente de ICC”;</li>
             
             <li>Na página de configuração, preencha a seção “Configurações do Bloco” de acordo com suas preferências.</li>
             </ol>
